@@ -2,25 +2,36 @@ import React from 'react';
 import './ChatEntry.css';
 import PropTypes from 'prop-types';
 import TimeStamp from './TimeStamp';
-import { useState } from 'react';
 
-const ChatEntry = ({ id, sender, body, timeStamp, liked }) => {
-  // const [likeCount, setLikeCount] = useState(0);
+const ChatEntry = (props) => {
+  const onLikeButtonClick = () => {
+    const updatedEntry = {
+      id: props.id,
+      sender: props.sender,
+      body: props.body,
+      timeStamp: props.timeStamp,
+      liked: !props.liked,
+    };
 
-  const toggleHeart = () => {
-    liked = !liked;
+    props.onUpdate(updatedEntry);
   };
 
+  const likedStatus = !props.liked ? '🤍' : '❤️';
+
   return (
-    <div className={`chat-entry ${sender === 'Vladimir' ? 'local' : 'remote'}`}>
-      <h2 className="entry-name">{sender}</h2>
+    <div
+      className={`chat-entry ${
+        props.sender === 'Vladimir' ? 'local' : 'remote'
+      }`}
+    >
+      <h2 className="entry-name">{props.sender}</h2>
       <section className="entry-bubble">
-        <p>{body}</p>
+        <p>{props.body}</p>
         <p className="entry-time">
-          <TimeStamp time={timeStamp} />
+          <TimeStamp time={props.timeStamp} />
         </p>
-        <button onClick={toggleHeart} className="like">
-          {!liked ? '🤍' : '❤️'}
+        <button onClick={onLikeButtonClick} className="like">
+          {likedStatus}
         </button>
       </section>
     </div>
