@@ -39,8 +39,6 @@ const App = () => {
         </section>
       </header>
       <main>
-        {/* Wave 01: Render one ChatEntry component
-        Wave 02: Render ChatLog component */}
         <ChatLog entries={chatData} onUpdateEntry={updateChatData} />
       </main>
     </div>
