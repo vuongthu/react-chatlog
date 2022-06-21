@@ -7,10 +7,10 @@ import { useState } from 'react';
 const App = () => {
   const [chatData, setChatData] = useState(chatMessages);
 
-  const updateChatData = (updatedEntry) => {
+  const updateLikedData = (id) => {
     const entries = chatData.map((entry) => {
-      if (entry.id === updatedEntry.id) {
-        return updatedEntry;
+      if (entry.id === id) {
+        return { ...entry, liked: !entry.liked };
       } else {
         return entry;
       }
@@ -39,7 +39,7 @@ const App = () => {
         </section>
       </header>
       <main>
-        <ChatLog entries={chatData} onUpdateEntry={updateChatData} />
+        <ChatLog entries={chatData} onUpdateEntry={updateLikedData} />
       </main>
     </div>
   );
